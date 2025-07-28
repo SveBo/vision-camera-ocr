@@ -66,12 +66,12 @@ export type OCRFrame = {
  */
 const plugin = VisionCameraProxy.initFrameProcessorPlugin('scanOCR');
 
-export function scanOCR(frame: Frame): OCRFrame {
+export function scanOCR(frame: Frame, args?: Record<string, any>): OCRFrame {
   'worklet';
   if (plugin == null) {
     throw new Error(
       'Failed to load Frame Processor Plugin "scanOCR"! Please check your dependencies and make sure that the plugin is linked correctly.'
     );
   }
-  return plugin.call(frame) as any;
+  return plugin.call(frame, args ?? {}) as any; 
 }
